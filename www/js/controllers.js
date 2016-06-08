@@ -2,16 +2,29 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('SignInCtrl', function($scope, $state) {
+.controller('SignInCtrl', function($scope, $state, AppService) {
   
   $scope.signIn = function(user) {
     console.log('Sign-In', user);
-    $state.go('tab.sessions');
+    AppService.login(user.username, user.password, 'Doctor').then(
+    function(data){
+      // Success
+      if (data.success) {
+         $state.go('tab.sessions');
+      } else {
+        // Fail
+        $scope.loginFail = true;
+      }
+    },
+    function(data){
+      // Fail
+      $scope.loginFail = true;
+    });
   };
   
 })
-.controller('SessionsCtrl', function($scope, Sessions) {
-  Sessions.all('184').then(function(data){
+.controller('SessionsCtrl', function($scope, $rootScope, Sessions, AppService) {
+  Sessions.all($rootScope.currentLogunInfo.id).then(function(data){
     $scope.sessions = data;
   }, function(data){
   });

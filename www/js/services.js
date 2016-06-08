@@ -1,6 +1,7 @@
 angular.module('starter.services', [])
 
-.factory('AppService',['SERVER','$interval', '$log','$http','$q',function(SERVER,$interval,$log,$http,$q) {
+.factory('AppService',['SERVER','$interval', '$log','$http','$q', '$rootScope',function(SERVER,$interval,$log,$http,$q, $rootScope) {
+  
   return {
     login: function(username, password, userType) {
       var url = SERVER.SERVER_ADDR + SERVER.URL_USER_dologin;
@@ -15,7 +16,7 @@ angular.module('starter.services', [])
         })
         .success(function(data, status, headers, config) {
           if (data.success) {
-            service.user = angular.extend(service.user,data.data.userInfo);
+            $rootScope.currentLogunInfo = data.data.userInfo;
           }
           deferred.resolve(data); // 声明执行成功，即http请求数据成功，可以返回数据了  
         }).error(function(data, status, headers, config) {
