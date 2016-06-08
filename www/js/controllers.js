@@ -2,6 +2,14 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
+.controller('SignInCtrl', function($scope, $state) {
+  
+  $scope.signIn = function(user) {
+    console.log('Sign-In', user);
+    $state.go('tab.sessions');
+  };
+  
+})
 .controller('SessionsCtrl', function($scope, Sessions) {
   Sessions.all('184').then(function(data){
     $scope.sessions = data;
