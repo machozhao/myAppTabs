@@ -103,13 +103,13 @@
   </ion-content>
 
 <ion-footer-bar align-title="left" class="bar-assertive">
-  <div class="buttons">
-    <button class="button">Left Button</button>
-  </div>
-  <h1 class="title">Title!</h1>
-  <div class="buttons" ng-click="doSomething()">
-    <button class="button">Right Button</button>
-  </div>
+		<button class="button button-clear icon ion-ios-plus-outline" ng-click="sendImage()"></button>
+    <label class="item-input-wrapper" style="background-color: #fff;">
+      <input type="text" placeholder="输入发送的文字信息" ng-model="chatData.chatContent">
+    </label>
+
+		<button ng-if="!chatData.chatContent.length" class="button  button-clear icon ion-ios-mic-outline padding-left padding-right "></button>
+		<button ng-if="chatData.chatContent.length" class="button button-calm " ng-click="sendMsg()">发送</button>
 </ion-footer-bar>
 
 </ion-view>
