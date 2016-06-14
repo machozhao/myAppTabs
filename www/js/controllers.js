@@ -49,8 +49,34 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('ChatDetailCtrl', function($scope, $stateParams, Messages, AppService) {
+
+      $scope.chatSessionId= $stateParams.chatSessionId;
+
+      $scope.title = "与" + $scope.personName + "对话";
+      $scope.sessionIsClosed = true;
+
+			//数据
+			$scope.chatData = {};
+			$scope.chatData.chatContent = "";
+			$scope.chatData.messages = [];
+			$scope.pageSize = 20;
+      
+      $scope.doLoadNew = function(){
+        //fromId,toId,startSendTime,endSendTime,msgContent,pageNo,pageSize
+        Messages.getChatMsgs($scope.chatSessionId, '', '', 1, $scope.pageSize).then(function(data) {
+          if (data.result && data.result.length > 0){
+             $scope.chatData.messages = data.result;
+             //$scope.chatSessionId = data.result[0].chatSession.id
+             //$scope.sessionIsClosed =  data.result[0].chatSession.sessionIsClose;
+          }
+        }, function(err) {
+          //错误处理
+        });
+      }
+      
+      // Load messages in current session
+      $scope.doLoadNew();
 })
 
 .controller('AccountCtrl', function($scope) {

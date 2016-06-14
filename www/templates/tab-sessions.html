@@ -1,9 +1,9 @@
 <ion-view view-title="参与的会话">
     <ion-content>
         <ion-list>
-            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="session in sessions" type="item-text-wrap" href="#/tab/chats/{{session.id}}">
+            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="session in sessions" type="item-text-wrap" href="#/tab/chats/{{session.chatSessionId}}">
                 <img ng-src="{{member.member.photoURL}}" ng-repeat="member in session.memberList" class="circle-person-icon">
-                <h2>{{session.topic}}</h2>
+                <h2>{{session.topic}} - {{session.chatSessionId}}</h2>
                 <p>{{session.lastContent}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
                     

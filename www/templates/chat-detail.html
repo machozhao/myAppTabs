@@ -9,15 +9,15 @@
               <!-- Conversations are loaded here -->
               <div class="direct-chat-messages">
                 <!-- Message. Default to the left -->
-                <div class="direct-chat-msg">
+                <div class="direct-chat-msg" ng-repeat="message in chatData.messages track by $index" ng-class="{'right': message.sender.id == currentLogunInfo.id}">
                   <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-left">Alexander Pierce</span>
-                    <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+                    <span class="direct-chat-name pull-left">{{message.sender.nickName}}</span>
+                    <span class="direct-chat-timestamp pull-right">{{message.sendTime | date:'yyyy-MM-dd HH:mm:ss Z'}}</span>
                   </div>
                   <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="../img/adminlte/user1-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
+                  <img class="direct-chat-img" src="{{message.sender.photoURL}}" alt="Message User Image"><!-- /.direct-chat-img -->
                   <div class="direct-chat-text">
-                    Is this template really for free? That's unbelievable!
+                    {{message.content}}
                   </div>
                   <!-- /.direct-chat-text -->
                 </div>
