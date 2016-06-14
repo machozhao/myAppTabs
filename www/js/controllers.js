@@ -3,6 +3,9 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', function($scope) {})
 
 .controller('SignInCtrl', function($scope, $state, AppService) {
+
+  // Just for development, set default user in login form
+  $scope.user = {username: '13801356729', password: '123456'};
   
   $scope.signIn = function(user) {
     console.log('Sign-In', user);
