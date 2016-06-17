@@ -78,6 +78,51 @@ angular.module('starter.controllers', [])
         });
       }
       
+      $scope.showImg = function(url) {
+					$scope.tempImgUrl = url;
+					if ($scope.modal_showImg) {
+						$scope.modal_showImg.show();
+					} else {
+						$ionicModal.fromTemplateUrl('templates/directive/my-chat-msg-TempImg.html', {
+							scope: $scope
+						}).then(function(modal) {
+							$scope.modal_showImg = modal;
+							$scope.modal_showImg.show();
+						});
+	
+					}
+      }
+	
+			$scope.playStatus = "点击播放";
+                $scope.closeImageDialog = function() {
+                    $scope.modal_showImg.hide();
+      };
+
+      $scope.playAudio = function(src){
+        console.log("play:"+src);
+
+        $scope.playStatus = "正在播放...";
+        try {
+            $scope.audio = new Audio(src);
+            $scope.audio.play();
+        } catch(e){
+          alert(e);
+        }
+        //console.log("status:"+item.outerHTML);
+        if($scope.media){
+            $scope.media.release();
+            $scope.media = null;
+        }
+        $scope.media = $cordovaMedia.newMedia(src)
+
+
+        $scope.media.play().then(function(data){
+                console.log("播放完成");
+                 $scope.playStatus = "点击播放";
+        });
+			}
+
+      
       // Load messages in current session
       $scope.doLoadNew();
 })

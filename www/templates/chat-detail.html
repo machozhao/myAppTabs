@@ -16,10 +16,14 @@
                   </div>
                   <!-- /.direct-chat-info -->
                   <img class="direct-chat-img" src="{{message.sender.photoURL}}" alt="Message User Image"><!-- /.direct-chat-img -->
-                  <div class="direct-chat-text">
+                  <div class="direct-chat-text" ng-if="message.messageType == 'PushTextMessage'">
                     {{message.content}}
                   </div>
                   <!-- /.direct-chat-text -->
+                  <div class="direct-chat-text" ng-if="message.messageType == 'PushMessage'">
+            			  <img ng-repeat="src in message.pushPhotoMessageList  track by $index" ng-if="src.mimeType.indexOf('image') != -1" ng-src="{{src.thumbnailURL}}" ng-click="showImg(src.photoURL)"/>
+			              <i ng-repeat="src in message.pushPhotoMessageList  track by $index" ng-if="src.mimeType.indexOf('audio') != -1" class="ion-ios-mic" ng-click="playAudio(src.photoURL,this)" ng-bind="playStatus">点击播放</i>
+                  </div>
                 </div>
                 <!-- /.direct-chat-msg -->
 
