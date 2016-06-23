@@ -52,7 +52,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Messages, AppService) {
+.controller('ChatDetailCtrl', function($scope, $cordovaMedia, $ionicLoading, $stateParams, Messages, AppService) {
 
       $scope.chatSessionId= $stateParams.chatSessionId;
 
@@ -97,8 +97,34 @@ angular.module('starter.controllers', [])
                 $scope.closeImageDialog = function() {
                     $scope.modal_showImg.hide();
       };
+      
+$scope.playAudio = function(url) {
+    // Play the audio file at url
+    var my_media = new Media(url,
+        // success callback
+        function () { console.log("playAudio():Audio Success"); },
+        // error callback
+        function (err) { console.log("playAudio():Audio Error: " + err); }
+    );
 
-      $scope.playAudio = function(src){
+    // Play audio
+    my_media.play();
+
+    // Pause after 10 seconds
+    setTimeout(function () {
+        my_media.pause();
+    }, 10000);
+};
+ 
+    var mediaStatusCallback = function(status) {
+        if(status == 1) {
+            $ionicLoading.show({template: 'Loading...'});
+        } else {
+            $ionicLoading.hide();
+        }
+    };
+    
+      $scope.playAudio1 = function(src){
         console.log("play:"+src);
 
         $scope.playStatus = "正在播放...";
@@ -120,7 +146,7 @@ angular.module('starter.controllers', [])
                 console.log("播放完成");
                  $scope.playStatus = "点击播放";
         });
-			}
+			};
 
       
       // Load messages in current session
