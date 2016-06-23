@@ -92,29 +92,29 @@ angular.module('starter.controllers', [])
 	
 					}
       }
-	
-			$scope.playStatus = "点击播放";
-                $scope.closeImageDialog = function() {
-                    $scope.modal_showImg.hide();
+      $scope.closeImageDialog = function() {
+          $scope.modal_showImg.hide();
       };
       
-$scope.playAudio = function(url) {
-    // Play the audio file at url
-    var my_media = new Media(url,
-        // success callback
-        function () { console.log("playAudio():Audio Success"); },
-        // error callback
-        function (err) { console.log("playAudio():Audio Error: " + err); }
-    );
+    $scope.playAudio = function(url) {
+      // Play the audio file at url
+      var playingAudio = new Media(url,
+          // success callback
+          function () { console.log("playAudio():Audio Success"); },
+          // error callback
+          function (err) { console.log("playAudio():Audio Error: " + err); },
+          // status callback
+          function (status) { console.log("playStatus: " + status);}
+      );
 
-    // Play audio
-    my_media.play();
+      // Play audio
+      playingAudio.play({ playAudioWhenScreenIsLocked : false });
 
-    // Pause after 10 seconds
-    setTimeout(function () {
-        my_media.pause();
-    }, 10000);
-};
+      // Pause after 300 seconds
+      setTimeout(function () {
+          my_media.pause();
+      }, 300000);
+    };
  
     var mediaStatusCallback = function(status) {
         if(status == 1) {
