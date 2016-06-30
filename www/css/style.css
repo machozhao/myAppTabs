@@ -1,4 +1,12 @@
 /* Empty. Add your own CSS if you like */
+.pull-left {
+    float: left!important;
+}
+
+.pull-right {
+    float: right!important;
+}
+
 .circle-person-icon {
     max-width: 40px;
     max-height: 40px;

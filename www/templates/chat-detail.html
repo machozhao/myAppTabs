@@ -11,11 +11,11 @@
                 <!-- Message. Default to the left -->
                 <div class="direct-chat-msg" ng-repeat="message in chatData.messages track by $index" ng-class="{'right': message.sender.id == currentLogunInfo.id}">
                   <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-left">{{message.sender.nickName}}</span>
-                    <span class="direct-chat-timestamp pull-right">{{message.sendTime | date:'yyyy-MM-dd HH:mm:ss Z'}}</span>
+                    <span class="direct-chat-name" ng-class="{'pull-right': message.sender.id == currentLogunInfo.id, 'pull-left': message.sender.id != currentLogunInfo.id}">{{message.sender.nickName}}</span>
+                    <span class="direct-chat-timestamp" ng-class="{'pull-left': message.sender.id == currentLogunInfo.id, 'pull-right': message.sender.id != currentLogunInfo.id}">{{message.sendTime | date:'yyyy-MM-dd HH:mm:ss Z'}}</span>
                   </div>
                   <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="{{message.sender.photoURL}}" alt="Message User Image"><!-- /.direct-chat-img -->
+                  <img class="direct-chat-img" ng-if="message.sender.photoURL" src="{{message.sender.photoURL}}" alt="Message User Image"><!-- /.direct-chat-img -->
                   <div class="direct-chat-text" ng-if="message.messageType == 'PushTextMessage'">
                     {{message.content}}
                   </div>
@@ -24,81 +24,6 @@
             			  <img ng-repeat="src in message.pushPhotoMessageList  track by $index" ng-if="src.mimeType.indexOf('image') != -1" ng-src="{{src.thumbnailURL}}" ng-click="showImg(src.photoURL)"/>
 			              <i ng-repeat="src in message.pushPhotoMessageList  track by $index" ng-if="src.mimeType.indexOf('audio') != -1" class="ion-ios-mic" ng-click="playAudio(src.photoURL,this)" ng-bind="playStatus">点击播放</i>
                   </div>
-                </div>
-                <!-- /.direct-chat-msg -->
-
-                <!-- Message to the right -->
-                <div class="direct-chat-msg right">
-                  <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-right">Sarah Bullock</span>
-                    <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-                  </div>
-                  <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="../img/adminlte/user3-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
-                  <div class="direct-chat-text">
-                    You better believe it!
-                  </div>
-                  <!-- /.direct-chat-text -->
-                </div>
-                <!-- /.direct-chat-msg -->
-
-                <!-- Message to the right -->
-                <div class="direct-chat-msg right">
-                  <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-right">Sarah Bullock</span>
-                    <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-                  </div>
-                  <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="../img/adminlte/user3-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
-                  <div class="direct-chat-text">
-                    You better believe it!
-                  </div>
-                  <!-- /.direct-chat-text -->
-                </div>
-                <!-- /.direct-chat-msg -->
-
-                <!-- Message to the right -->
-                <div class="direct-chat-msg right">
-                  <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-right">Sarah Bullock</span>
-                    <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-                  </div>
-                  <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="../img/adminlte/user3-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
-                  <div class="direct-chat-text">
-                    You better believe it!
-                  </div>
-                  <!-- /.direct-chat-text -->
-                </div>
-                <!-- /.direct-chat-msg -->
-
-                <!-- Message to the right -->
-                <div class="direct-chat-msg right">
-                  <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-right">Sarah Bullock</span>
-                    <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-                  </div>
-                  <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="../img/adminlte/user3-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
-                  <div class="direct-chat-text">
-                    You better believe it!
-                  </div>
-                  <!-- /.direct-chat-text -->
-                </div>
-                <!-- /.direct-chat-msg -->
-
-                <!-- Message to the right -->
-                <div class="direct-chat-msg right">
-                  <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-right">Sarah Bullock</span>
-                    <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-                  </div>
-                  <!-- /.direct-chat-info -->
-                  <img class="direct-chat-img" src="../img/adminlte/user3-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
-                  <div class="direct-chat-text">
-                    You better believe it!
-                  </div>
-                  <!-- /.direct-chat-text -->
                 </div>
                 <!-- /.direct-chat-msg -->
 
